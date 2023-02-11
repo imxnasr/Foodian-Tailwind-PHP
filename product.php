@@ -1,67 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="./css/all.min.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <title>Product - Foodian</title>
-</head>
-<body>
+<?php
+  $title = 'Product - Foodian';
+  include './includes/header.php';
+?>
   <!-- Header -->
   <header class="bg-header h-96 bg-opacity-50">
     <!-- Navbar -->
-    <nav>
-      <!-- Search Box -->
-      <div class="search-box absolute bg-white z-10 w-full h-24 -top-24">
-        <form class="container flex items-end justify-between mx-auto h-full p-6">
-          <input class="border-b-2 flex-1 focus:outline-none focus:border-mainColor p-2" type="text" name="search" placeholder="Search" />
-          <button class="close-search-box ml-5 text-xl" type="button"><i class="fa-solid fa-xmark text-[#999]"></i></button>
-        </form>
-      </div>
-      <!-- Container of Main Nav -->
-      <div class="container mx-auto p-6 flex items-center justify-between">
-        <!-- Left Side Nav -->
-        <a href="/" class="mr-14"><img src="./img/logo.webp" alt="Logo"></a>
-        <!-- Right Side Nav - Search & Links-->
-        <div class="flex flex-grow-0 md:flex-1 items-start justify-end md:justify-between">
-          <!-- Links -->
-          <i class="fa-solid fa-bars block md:hidden mr-5 cursor-pointer"></i>
-          <ul class="nav-links gap-4 hidden md:flex text-lg">
-            <li><a href="/">Home</a></li>
-            <li><a href="./collections.html">Recipe</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Faq</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-          <!-- Search -->
-          <div class="search-btn flex items-center gap-3 hover:text-mainColor cursor-pointer transition-colors">
-            <p class="text-lg hidden md:block">Search</p>
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
-        </div>
-        <!-- Mobile Navbar -->
-        <div class="mobile-nav-container fixed w-full h-full hidden md:hidden left-0 top-0 z-10">
-          <!-- Navbar Overlay -->
-          <div class="mobile-nav-overlay w-full h-full bg-black bg-opacity-50"></div>
-          <!-- Mobile Links Container -->
-          <div class="mobile-nav fixed bg-white grid place-items-center h-full w-60 -right-0 top-0 transition-all">
-            <ul class="gap-10 flex text-xl flex-col items-center">
-              <li><a href="/">Home</a></li>
-              <li><a href="./collections.html">Recipe</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Faq</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
+   <?php include './includes/navbar.php' ?>
     <div class="container mx-auto p-6 flex items-center flex-1">
       <h1 class="text-4xl font-medium md:text-6xl">Product / Salmon With Lemon</h1>
     </div>
@@ -168,47 +112,7 @@ Praesent vestibulum congue tellus at fringilla. Curabitur vitae semper sem, eu c
     </div>
   </section>
   <!-- Footer -->
-  <footer>
-    <div class="container mx-auto p-6 border-t-2">
-      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-        <!-- Logo -->
-        <div class="grid place-items-center"><img src="./img/logo.webp" alt="logo"></div>
-        <!-- Newsletter -->
-        <div class="flex flex-2 flex-col md:flex-row my-4 lg:my-0 items-center justify-center lg:justify-between gap-2">
-          <h1 class="text-4xl">Join US</h1>
-          <!-- Input -->
-          <form class="border-2 p-2 border-black flex justify-center items-center">
-            <input type="text" name="newsletter" placeholder="Your email address" class="focus:outline-none" required />
-            <button type="submit" class="cursor-pointer text-mainColor">
-              <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </form>
-        </div>
-        <!-- Social Links -->
-        <div class="flex flex-1 items-center justify-around mx-auto lg:col-span-2 xl:col-span-1 gap-2">
-          <p class="text-lg">Follow US</p>
-          <a href="#" class="bg-mainColor rounded-full w-7 h-7 grid place-items-center"><i class="fa-brands fa-facebook-f text-white"></i></a>
-          <a href="#" class="bg-mainColor rounded-full w-7 h-7 grid place-items-center"><i class="fa-brands fa-instagram text-white"></i></a>
-          <a href="#" class="bg-mainColor rounded-full w-7 h-7 grid place-items-center"><i class="fa-brands fa-linkedin-in text-white"></i></a>
-        </div>
-      </div>
-      <!-- Footer Links -->
-      <ul class="gap-4 flex flex-wrap text-lg items-center justify-center my-5">
-        <li><a href="/">Home</a></li>
-        <li><a href="./collections.html">Recipe</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Faq</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-    <!-- Copyright -->
-    <div class="text-center bg-footer py-5">&copy; Copyright All rights reserved 2023 - <a href="https://www.twitter.com/itsimoox" target="_blank">IMX</a></div>
-  </footer>
+  <?php include './includes/footer.php'; ?>
   <!-- To Top Button -->
-  <div class="to-top-btn rounded-full w-10 h-10 bg-mainColor text-white place-items-center cursor-pointer fixed right-5 bottom-10 hidden">
-    <i class="fa-solid fa-arrow-up"></i>
-  </div>
-  <script src="./js/script.js"></script>
-</body>
-</html>
+  <?php include './includes/toTopButton.php'; ?>
+  <?php include './includes/bottom.php'; ?>
