@@ -36,9 +36,8 @@
       </a>
     </div>
   </div>
-  <?php }?>
 
-  <?php if(isset($_GET['db']) && $_GET['db'] === 'users'){ // Users Table
+  <?php } else if(isset($_GET['db']) && $_GET['db'] === 'users'){ // Users Table
     if(!isset($_GET['action']) || $_GET['action'] === ''){
     $stmt = $db -> prepare("SELECT * FROM user");
     $stmt -> execute();
@@ -249,7 +248,7 @@
   <?php } else if(isset($_GET['db']) && $_GET['db'] === 'orders'){ // Orders Table
     echo 'Orders';
   ?>
-  <?php} else if(isset($_GET['db']) && $_GET['db'] === 'categories'){ // Categories Table
+  <?php } else if(isset($_GET['db']) && $_GET['db'] === 'categories'){ // Categories Table
     echo 'Categories';
   ?>
   <?php
