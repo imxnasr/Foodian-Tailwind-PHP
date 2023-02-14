@@ -289,6 +289,56 @@
         <button class="py-3 px-4 bg-mainColor text-white mt-6">Add new product</button>
       </a>
     </div>
+  <?php } else if (isset($_GET['action']) && $_GET['action'] === 'add') {
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $name = $_POST['name'];
+      $description = $_POST['description'];
+      $in_stock = $_POST['in_stock'];
+      $rating = $_POST['rating'];
+      $price = $_POST['price'];
+      $microtime = floor(microtime(true) * 1000);
+      $image = $_FILES['image'];
+      $allowedImageExtension = array('jpg', 'jpeg', 'png', 'webp');
+      $imageExtension = strtolower(end(explode('.', $image['name'])));
+      if(!empty($image['name']) && !in_array($imageExtension, $allowedImageExtension)){
+        $alert = 'image';
+      } else {
+        $stmt;
+        if(!empty($image['name'])){
+          $newImageName = $microtime . '_' . $image['name'];
+          move_uploaded_file($image['tmp_name'], '../uploads/products/' . $newImageName);
+          $stmt = $db -> prepare("INSERT INTO product (name, description, in_stock, rating, price, image) VALUES (?, ?, ?, ?, ?, ?)");
+          $stmt -> execute([$name, $description, $in_stock, $rating, $price, $newImageName]);
+        }else {
+          $stmt = $db -> prepare("INSERT INTO product (name, description, in_stock, rating, price) VALUES (?, ?, ?, ?, ?)");
+          $stmt -> execute([$name, $description, $in_stock, $rating, $price]);
+        }
+        $alert = 'success';
+      }
+    }
+  ?>
+  <div class="container mx-auto h-full p-10 md:p-20 grid place-items-center">
+    <form method="POST" class="w-full md:w-3/4 xl:w-1/2 flex flex-col gap-6" enctype="multipart/form-data">
+      <?php if($alert === 'success'){ ?>
+        <div class="bg-green-100 w-full p-3 text-green-600 border-green-200 border-2 rounded">
+          User created successfully !!
+        </div>
+      <?php } ?>
+      <?php if($alert === 'image'){ ?>
+        <div class="bg-red-100 w-full p-3 text-red-600 border-red-200 border-2 rounded">
+          This file type is not allowed
+        </div>
+      <?php } ?>
+      <h1 class="text-4xl font-semibold">Add New Product</h1>
+      <input class="w-full p-3 border focus:outline-none focus:border-mainColor" required type="text" name="name" placeholder="Name" />
+      <textarea class="w-full p-3 border focus:outline-none focus:border-mainColor" name="description" placeholder="Description"></textarea>
+      <input class="w-full p-3 border focus:outline-none focus:border-mainColor" type="number" name="in_stock" placeholder="In Stock" min="0" />
+      <input class="w-full p-3 border focus:outline-none focus:border-mainColor" type="number" name="rating" placeholder="Rating ex(4.5)" min="0" max="5" step="0.5" />
+      <input class="w-full p-3 border focus:outline-none focus:border-mainColor" required type="number" name="price" placeholder="Price ex(123.45)" min="0" step="0.01" />
+      <input class="w-full p-3 border focus:outline-none focus:border-mainColor" type="file" name="image" placeholder="Image" />
+      <input class="bg-mainColor w-full text-white py-3 cursor-pointer focus:outline-none" type="submit" name="submit" value="Add" />
+    </form>
+  </div>
   <?php } ?>
   <?php } else if(isset($_GET['db']) && $_GET['db'] === 'orders'){ // Orders Table
     echo 'Orders';
