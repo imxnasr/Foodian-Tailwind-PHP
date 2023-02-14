@@ -243,8 +243,53 @@
     exit();
   } ?>
   <?php } else if(isset($_GET['db']) && $_GET['db'] === 'products'){ // Products Table
-    echo 'Products';
+    if(!isset($_GET['action']) || $_GET['action'] === ''){
+      $stmt = $db -> prepare("SELECT * FROM product");
+      $stmt -> execute();
+      $table = $stmt -> fetchAll();
   ?>
+    <div class="container mx-auto p-6">
+      <!-- Title -->
+      <h1 class="text-4xl font-semibold my-5">Products Table:</h1>
+      <!-- Table -->
+      <div class="w-full overflow-scroll">
+        <table class="table-auto w-full border-[1px]">
+          <thead class="font-bold text-white bg-mainColor">
+            <tr>
+              <td class="p-3 text-center">ID</td>
+              <td class="p-3 text-center">Name</td>
+              <td class="p-3 text-center">Description</td>
+              <td class="p-3 text-center">Image</td>
+              <td class="p-3 text-center">In Stock</td>
+              <td class="p-3 text-center">Rating</td>
+              <td class="p-3 text-center">Price</td>
+              <td class="p-3 text-center">Sold Times</td>
+              <td class="p-3 text-center">Date Added</td>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($table as $row){ ?>
+            <tr class="border-t-[1px]">
+              <td class="p-3 text-center"><?=$row['id']?></td>
+              <td class="p-3 text-center"><a class="text-mainColor underline" href="?db=products&action=edit&id=<?=$row['id'] ?>"><?=$row['name']?></a></td>
+              <td class="p-3 text-center"><?=substr($row['description'], 0, 25) . "..."?></td>
+              <td class="p-3 text-center"><img class="aspect-square h-10 mx-auto" src="/Foodian/uploads/products/<?=$row['image']?>" alt=""></td>
+              <td class="p-3 text-center"><?=$row['in_stock']?></td>
+              <td class="p-3 text-center"><?=$row['rating']?></td>
+              <td class="p-3 text-center"><?=number_format($row['price'], 2, '.', "")?></td>
+              <td class="p-3 text-center"><?=$row['sold_times']?></td>
+              <td class="p-3 text-center"><?=date_format(date_create($row['date_added']), "d-m-Y")?></td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+      <!-- Add Button -->
+      <a href="?db=products&action=add">
+        <button class="py-3 px-4 bg-mainColor text-white mt-6">Add new product</button>
+      </a>
+    </div>
+  <?php } ?>
   <?php } else if(isset($_GET['db']) && $_GET['db'] === 'orders'){ // Orders Table
     echo 'Orders';
   ?>
