@@ -1,6 +1,9 @@
   <?php
     $title = 'Products - Foodian';
     include './includes/header.php';
+    $stmt = $db -> prepare("SELECT * FROM product");
+    $stmt -> execute();
+    $table = $stmt -> fetchAll();
   ?>
   <!-- Header -->
   <header class="bg-header h-96 bg-opacity-50">
@@ -16,21 +19,25 @@
       <!-- Grid Foods -->
       <div class="my-10 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         
-        <!-- Food Card Item -->
-        <div class="shadow-xl">
-          <a href="#"><img src="./img/SalmonWithLemon.webp" alt="product"></a>
-          <div class="p-6">
-            <a href="#"><h1 class="text-4xl">Salmon With Lemon</h1></a>
-            <h3 class="text-mainColor text-xl font-semibold my-3">$450.00</h3>
-            <p class="my-3">Bam tempus turpis at metus scelerisque placerat nulla deumantos solicitud...</p>
-            <!-- Rating Stars -->
-            <div class="flex text-mainColor">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-regular fa-star"></i>
-              <i class="fa-regular fa-star-half-stroke"></i>
+        <?php foreach($table as $row){ ?>
+          <!-- Food Card Item -->
+          <div class="shadow-xl">
+            <a href="product.php?id=<?=$row['id']?>"><img src="/Foodian/uploads/products/<?=$row['image']?>" alt="<?=$row['name']?>"></a>
+            <div class="p-6">
+              <a href="product.php?id=<?=$row['id']?>"><h1 class="text-4xl"><?=$row['name']?></h1></a>
+              <h3 class="text-mainColor text-xl font-semibold my-3">$<?=number_format($row['price'], 2, '.', "")?></h3>
+              <p class="my-3"><?=substr($row['description'], 0, 80) . "..."?></p>
+              <!-- Rating Stars -->
+              <div class="flex text-mainColor">
+                <?php if((float)$row['rating'] >= 1){echo '<i class="fa-solid fa-star"></i>';} else if ((float)$row['rating'] >= 0.5) {echo '<i class="fa-regular fa-star-half-stroke"></i>';} else {echo '<i class="fa-regular fa-star"></i>';} ?>
+                <?php if((float)$row['rating'] >= 2){echo '<i class="fa-solid fa-star"></i>';} else if ((float)$row['rating'] >= 1.5) {echo '<i class="fa-regular fa-star-half-stroke"></i>';} else {echo '<i class="fa-regular fa-star"></i>';} ?>
+                <?php if((float)$row['rating'] >= 3){echo '<i class="fa-solid fa-star"></i>';} else if ((float)$row['rating'] >= 2.5) {echo '<i class="fa-regular fa-star-half-stroke"></i>';} else {echo '<i class="fa-regular fa-star"></i>';} ?>
+                <?php if((float)$row['rating'] >= 4){echo '<i class="fa-solid fa-star"></i>';} else if ((float)$row['rating'] >= 3.5) {echo '<i class="fa-regular fa-star-half-stroke"></i>';} else {echo '<i class="fa-regular fa-star"></i>';} ?>
+                <?php if((float)$row['rating'] >= 5){echo '<i class="fa-solid fa-star"></i>';} else if ((float)$row['rating'] >= 4.5) {echo '<i class="fa-regular fa-star-half-stroke"></i>';} else {echo '<i class="fa-regular fa-star"></i>';} ?>
+              </div>
             </div>
           </div>
-        </div>
+        <?php } ?>
 
       </div>
     </div>

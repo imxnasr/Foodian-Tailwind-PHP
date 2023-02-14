@@ -276,7 +276,7 @@
               <td class="p-3 text-center"><img class="aspect-square h-10 mx-auto" src="/Foodian/uploads/products/<?=$row['image']?>" alt=""></td>
               <td class="p-3 text-center"><?=$row['in_stock']?></td>
               <td class="p-3 text-center"><?=$row['rating']?></td>
-              <td class="p-3 text-center"><?=number_format($row['price'], 2, '.', "")?></td>
+              <td class="p-3 text-center">$<?=number_format($row['price'], 2, '.', "")?></td>
               <td class="p-3 text-center"><?=$row['sold_times']?></td>
               <td class="p-3 text-center"><?=date_format(date_create($row['date_added']), "d-m-Y")?></td>
             </tr>
@@ -289,7 +289,7 @@
         <button class="py-3 px-4 bg-mainColor text-white mt-6">Add new product</button>
       </a>
     </div>
-  <?php } else if (isset($_GET['action']) && $_GET['action'] === 'add') {
+  <?php } else if (isset($_GET['action']) && $_GET['action'] === 'add') { // Add New Product
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $name = $_POST['name'];
       $description = $_POST['description'];

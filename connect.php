@@ -1,6 +1,6 @@
 
 <?php
-  $dsn = 'mysql:host=localhost;dbname=ecommerce';
+  $dsn = 'mysql:host=localhost;dbname=foodian';
   $user = 'root';
   $pass = '';
   $option = [
