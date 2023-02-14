@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./*.html', './*.php'],
+  content: ['./*.php', './admin/*.php', './includes/*.php', './admin/includes/*.php'],
   theme: {
     screens: {
       sm: '480px',
